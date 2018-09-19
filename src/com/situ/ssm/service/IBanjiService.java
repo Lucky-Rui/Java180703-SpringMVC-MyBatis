@@ -9,4 +9,8 @@ public interface IBanjiService {
 
 	boolean deleteById(Integer id);
 
+	boolean checkName(String name);
+
+	boolean addBanji(Banji banji);
+
 }

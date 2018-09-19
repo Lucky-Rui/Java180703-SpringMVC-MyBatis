@@ -21,6 +21,30 @@ public interface IBanjiDao {
 	 * @param pageSize
 	 * @return list集合
 	 */
-	List<Banji> pageList(@Param("offset")Integer offset,@Param("pageSize")Integer pageSize);
+	List<Banji> pageList(@Param("offset") Integer offset, @Param("pageSize") Integer pageSize);
+
+	/**
+	 * 根据id删除班级
+	 * 
+	 * @param id
+	 * @return 影响的行数
+	 */
+	int deleteById(Integer id);
+
+	/**
+	 * 查找班级是否有重名
+	 * 
+	 * @param name
+	 * @return 重名的个数
+	 */
+	int findCountByName(String name);
+
+	/**
+	 * 添加班级
+	 * 
+	 * @param banji
+	 * @return
+	 */
+	int addBanji(Banji banji);
 
 }

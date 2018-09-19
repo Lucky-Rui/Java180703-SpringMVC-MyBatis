@@ -65,7 +65,7 @@
 				<div class="list-group">
 					<a href="${ctx}/banji/pageList.action"
 						class="list-group-item active"> 班级列表 </a> 
-					<a href="banji_add.jsp"
+					<a href="javascript:addBanji()"
 						class="list-group-item">班级添加</a>
 				</div>
 			</div>
@@ -162,7 +162,18 @@
 				}
 			} */
 			function deleteById(id,pageNo){
-				mylayer.confirm("你确定要删除吗？","${ctx}/banji?method=deleteById&id="+ id+"&pageNo="+pageNo);
+				mylayer.confirm("你确定要删除吗？","${ctx}/banji/deleteById.action?id="+ id+"&pageNo="+pageNo);
+			}
+				
+			function addBanji(){
+				//layer弹窗,弹出添加页面
+				layer.open({
+					type : 2,//iframe
+					title : "添加班级",
+					area : ["400px","500px"],
+					offset : "100px",//只定义top坐标，水平保持居中
+					content : "${ctx}/banji/getAddPage.action"
+				});
 			}
 			
 			function selectAll(){

@@ -12,24 +12,82 @@
 	<!-- resultMap最终是要将结果映射到Student上,当实体类的属性名和表的字段名不一致的时候，必须要写这个映射 -->
 	<!-- 查询的返回的属性就要写resultMap="studentMap" -->
 	<resultMap type="Student" id="studentMap">
-		<!-- 映射组件属性： 如果有多个主键字段，就定义多个id -->
-		<!-- property:类的属性名 -->
-   		<!-- column:表的字段名 -->
+		<!-- 映射组件属性：如果有多个主键字段，就定义多个id\property:类的属性名 \column:表的字段名-->
 		<id property="id" column="id"/>
    		<!-- result定义普通属性 -->
 		<result property="name" column="name"/>
 		<result property="age" column="age"/>
-		<result property="gender" column="genser"/>
+		<result property="gender" column="gender"/>
 	</resultMap>
+	
+	<resultMap type="Student" id="studentBanjiMap" extends="studentMap">
+		<!-- association:关联 -->
+		<association property="banji" javaType="Banji">
+			<id property="id" column="banjiId"/>
+			<result property="name" column="banjiName"/>			
+		</association>
+	</resultMap>
+	
+<!-- 	<resultMap type="Studaent" id="studentBanjiCourseMap" extends="StudentMap">
+		<association property="banji" javaType="Banji">
+			<id property="id" column="banjiId"/>
+			<result property="name" column="banjiName"/>
+			<collection property="courseList">
+				
+			</collection>
+		</association>
+	</resultMap> -->
+	
 	<!-- Sql中可以将重复代码提取出来，使用include引用，达到sql重用的目的 -->
 	<sql id="studentColums">
 		id,name,age,gender,banji_id
 	</sql>
 
 	<!-- 业务代码 -->
-	<select id="list" resultMap="studentMap" >
+	<select id="listDemo" resultMap="studentMap" >
 		select <include refid="studentColums"/>
 		from student		
+	</select>
+	
+	<select id="list" resultMap="studentBanjiMap">
+		SELECT s.id,s.name,s.age,s.gender,b.id AS banjiId,b.name AS banjiName
+		FROM student AS s INNER JOIN banji AS b
+		ON s.banji_id=b.id;
+		ORDER BY s.id
+	</select>
+	
+	<select id="getTotalCount" parameterType="StudentSearchCondition" resultType="int">
+	   select count(id)
+	   from student
+	   <where>
+	     <if test="name != null and name != '' ">
+	        and name like '%${name}%'
+	     </if>
+	     <if test="age != null">
+	        and age=#{age}
+	     </if>
+	     <if test="gender != null and gender != '' ">
+	        and gender=#{gender}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="findPageBeanListByCondition" resultMap="studentBanjiMap">
+		SELECT s.id,s.name,s.age,s.gender,b.id AS banjiId,b.name AS banjiName 
+		FROM student AS s INNER JOIN banji AS b ON s.banji_id = b.id
+	   <where>
+	     <if test="condition.name != null and condition.name != '' ">
+	        and name like '%${condition.name}%'
+	     </if>
+	     <if test="condition.age != null">
+	        and age=#{condition.age}
+	     </if>
+	     <if test="condition.gender != null and condition.gender != '' ">
+	        and gender=#{condition.gender}
+	     </if>
+	   </where>
+	   ORDER BY s.id
+	   limit #{offset},#{condition.pageSize}
 	</select>
 	
 	

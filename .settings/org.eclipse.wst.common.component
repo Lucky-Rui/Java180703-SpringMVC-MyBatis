@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="Java180703-SpringMVC+MyBatis">
+    <wb-module deploy-name="Java180703-SpringMVCMyBatis">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="context-root" value="Java180703-SpringMVC+MyBatis"/>
-        <property name="java-output-path" value="/Java180703-SpringMVC+MyBatis/build/classes"/>
+        <property name="java-output-path" value="/Java180703-SpringMVCMyBatis/build/classes"/>
+        <property name="context-root" value="Java180703-SpringMVCMyBatis"/>
     </wb-module>
 </project-modules>

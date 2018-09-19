@@ -85,8 +85,8 @@
 				<form action="${ctx}/student/pageList.action"
 						 id="searchFrom"  method="POST">
  					<input type="hidden" id="pageNo" name="pageNo"/>
-					姓名：<input type="text" name="name" value="${searchCondition.name}"/>
-					年龄：<input type="text" name="age" value="${searchCondition.age}"/>
+					姓名：<input type="text" name="name" value="${condition.name}"/>
+					年龄：<input type="text" name="age" value="${condition.age}"/>
 					性别：<select id="searchGender" name="gender">
 							<option value="">不限</option>
 							<option value="男">男</option>
@@ -103,24 +103,26 @@
 						<th>姓名</th>
 						<th>年龄</th>
 						<th>性别</th>
+						<th>班级ID</th>
 						<th>班级</th>
 						<th>修改</th>
 						<th> <a href="javascript:deleteAll()">批量删除</a></th>
 					</tr>
-					<c:forEach items="${pageBean.list}" var="map">
+					<c:forEach items="${pageBean.list}" var="student">
 						<tr>
 							<td><input type="checkbox" name="selectIds"
-								value="${map['s_id']}" /></td>
-							<td>${map['s_id']}</td>
-							<td>${map['s_name']}</td>
-							<td>${map['s_age']}</td>
-							<td>${map['s_gender']}</td>
-							<td>${map['b_name']}</td>
+								value="${student.id}" /></td>
+							<td>${student.id}</td>
+							<td>${student.name}</td>
+							<td>${student.age}</td>
+							<td>${student.gender}</td>
+							<td>${student.banji.id}</td>
+							<td>${student.banji.name}</td>
 							<td><a
-								href="${ctx}/student/toUpdate.action?id=${map['s_id']}">
+								href="${ctx}/student/toUpdate.action?id=${student.id}">
 									修改 </a></td>
 							<td><a
-								href="javascript:deleteById(${map['s_id']})">
+								href="javascript:deleteById(${student.id},${pageBean.pageNo} })">
 									删除 </a></td>
 						</tr>
 					</c:forEach>
@@ -228,8 +230,8 @@
 				mylayer.confirm("你确定要删除吗？","${ctx}/student/deleteAll.action");
 			}
 			
-			function deleteById(id){
-				mylayer.confirm("你确定要删除吗？","${ctx}/student/deleteById.action?id="+ id);
+			function deleteById(id,pageNo){
+				mylayer.confirm("你确定要删除吗？","${ctx}/student/deleteById.action?id="+ id+"&pageNo="+pageNo);
 			}
 		</script>
 </body>

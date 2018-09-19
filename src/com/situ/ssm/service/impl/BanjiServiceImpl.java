@@ -10,16 +10,15 @@ import com.situ.ssm.service.IBanjiService;
 import com.situ.ssm.util.MyBatisUtil;
 import com.situ.ssm.vo.PageBean;
 
-public class BanjiServiceImpl implements IBanjiService{
+public class BanjiServiceImpl implements IBanjiService {
 	private IBanjiDao banjiDao = null;
+	SqlSession sqlSession = null;
+
 	public BanjiServiceImpl() {
-		SqlSession sqlSession = MyBatisUtil.getSqlSession();
+		sqlSession = MyBatisUtil.getSqlSession();
 		banjiDao = sqlSession.getMapper(IBanjiDao.class);
 	}
-	
-	/**
-	 *	
-	 */
+
 	@Override
 	public PageBean<Banji> getPageBean(Integer pageNo, Integer pageSize) {
 		PageBean<Banji> pageBean = new PageBean<>();
@@ -42,8 +41,21 @@ public class BanjiServiceImpl implements IBanjiService{
 
 	@Override
 	public boolean deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
+		int count = banjiDao.deleteById(id);
+		sqlSession.commit();
+		return count == 1 ? true : false;
+	}
+
+	@Override
+	public boolean checkName(String name) {
+		int count = banjiDao.findCountByName(name);
+		return count > 0 ? true : false;
+	}
+
+	@Override
+	public boolean addBanji(Banji banji) {
+		int count = banjiDao.addBanji(banji);
+		return count == 1 ? true : false;
 	}
 
 }

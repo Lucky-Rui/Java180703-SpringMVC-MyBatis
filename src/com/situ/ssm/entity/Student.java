@@ -5,7 +5,9 @@ public class Student {
 	private String name;
 	private Integer age;
 	private String gender;
-	private Integer banjiId;
+	// 一个学生属于一个班级，一对一关系
+	// private Integer banjiId;
+	private Banji banji;
 
 	public Integer getId() {
 		return id;
@@ -39,17 +41,17 @@ public class Student {
 		this.gender = gender;
 	}
 
-	public Integer getBanjiId() {
-		return banjiId;
+	public Banji getBanji() {
+		return banji;
 	}
 
-	public void setBanjiId(Integer banjiId) {
-		this.banjiId = banjiId;
+	public void setBanji(Banji banji) {
+		this.banji = banji;
 	}
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", banjiId=" + banjiId
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", gender=" + gender + ", banji=" + banji
 				+ "]";
 	}
 
