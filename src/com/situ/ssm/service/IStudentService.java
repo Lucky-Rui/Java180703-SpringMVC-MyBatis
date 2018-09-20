@@ -15,5 +15,7 @@ public interface IStudentService {
 	PageBean<Student> getPageBean(StudentSearchCondition condition);
 
 	boolean deleteById(Integer id);
+
+	boolean addStudent(Student student);
 	
 }

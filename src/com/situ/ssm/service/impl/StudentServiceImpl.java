@@ -55,4 +55,10 @@ public class StudentServiceImpl implements IStudentService {
 		return count == 1 ? true : false;
 	}
 
+	@Override
+	public boolean addStudent(Student student) {
+		int count = studentDao.addStudent(student);
+		return count == 1 ? true : false;
+	}
+
 }

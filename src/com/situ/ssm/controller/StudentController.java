@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.situ.ssm.entity.Banji;
 import com.situ.ssm.entity.Student;
 import com.situ.ssm.service.IStudentService;
 import com.situ.ssm.service.impl.StudentServiceImpl;
@@ -57,5 +58,16 @@ public class StudentController {
 	public String deleteById(Integer id, Integer pageNo) {
 		studentService.deleteById(id);
 		return "redirect:/student/pageList.action?pageNo=" + pageNo;
+	}
+	
+	@RequestMapping(value = "/getAddPage")
+	public String getAddPage() {
+		return "/student/student_add";
+	}
+
+	@RequestMapping(value = "/addStudent")
+	@ResponseBody
+	public boolean addBanji(Student student) {
+		return studentService.addStudent(student);
 	}
 }

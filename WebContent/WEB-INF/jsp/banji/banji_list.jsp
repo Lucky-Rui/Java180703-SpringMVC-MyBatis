@@ -88,7 +88,7 @@
 							<td>${banji.id}</td>
 							<td>${banji.name}</td>
 							<td><a
-								href="${ctx}/banji?method=toUpdate&id=${banji.id}">修改</a></td>
+								href="javascript:updateBanji(${banji.id})">修改</a></td>
 							<td><a
 								href="javascript:deleteById(${banji.id},${pageBean.pageNo})">删除</a>
 							</td>
@@ -175,6 +175,17 @@
 					content : "${ctx}/banji/getAddPage.action"
 				});
 			}
+			
+			function updateBanji(id){
+				layer.open({
+					type : 2,
+					title : "修改班级",
+					area : ["400px","500px"],
+					offset : "100px",
+					content : "${ctx}/banji/getUpdatePage.action"
+				});
+			}
+			
 			
 			function selectAll(){
 				//得到上面全选、反选按钮的状态

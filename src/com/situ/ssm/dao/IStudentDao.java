@@ -19,4 +19,6 @@ public interface IStudentDao {
 
 	int deleteById(Integer id);
 
+	int addStudent(Student student);
+
 }
