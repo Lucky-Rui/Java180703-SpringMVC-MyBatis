@@ -15,7 +15,8 @@ public interface IStudentDao {
 
 	int getTotalCount(StudentSearchCondition condition);
 
-	List<Student> findPageBeanListByCondition(@Param("condition")StudentSearchCondition condition, @Param("offset")Integer offset);
+	List<Student> findPageBeanListByCondition(@Param("condition") StudentSearchCondition condition,
+			@Param("offset") Integer offset);
 
 	int deleteById(Integer id);
 

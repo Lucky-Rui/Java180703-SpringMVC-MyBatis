@@ -17,5 +17,5 @@ public interface IStudentService {
 	boolean deleteById(Integer id);
 
 	boolean addStudent(Student student);
-	
+
 }

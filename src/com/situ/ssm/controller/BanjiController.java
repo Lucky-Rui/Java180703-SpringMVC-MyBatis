@@ -30,7 +30,7 @@ public class BanjiController {
 
 	@RequestMapping(value = "/deleteById")
 	public String deleteById(Integer id, Integer pageNo) {
-		banjiService.deleteById(id);
+		boolean result = banjiService.deleteById(id);
 		return "redirect:/banji/pageList.action?pageNo=" + pageNo;
 	}
 
